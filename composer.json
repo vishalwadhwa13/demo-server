@@ -12,5 +12,11 @@
             "name": "vishalwadhwa13",
             "email": "vishal.wadhwa@zomato.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+          "Restaurant_service\\": "src/services/Restaurant_service",
+          "GPBMetadata\\": "src/services/GPBMetadata"
+        }
+      }
 }
