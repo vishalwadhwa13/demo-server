@@ -1,0 +1,16 @@
+{
+    "name": "vishalwadhwa13/demo-server",
+    "description": "API to connect with microservices",
+    "type": "project",
+    "require": {
+        "grpc/grpc": "^1.19",
+        "google/protobuf": "^3.8",
+        "slim/slim": "^3.12"
+    },
+    "authors": [
+        {
+            "name": "vishalwadhwa13",
+            "email": "vishal.wadhwa@zomato.com"
+        }
+    ]
+}
