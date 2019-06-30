@@ -1,0 +1,4 @@
+vendor/*
+
+# Ignoring binaries because protos have already been compiled.
+bin

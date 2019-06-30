@@ -21,7 +21,7 @@ require '../../vendor/autoload.php';
 require '../utils/utils.php';
 
 $client = new RestaurantServiceClient(
-    ':8080',
+    (getenv("ENV") === "docker" ? "host.docker.internal" : "").":8080",
     [
         'credentials' => Grpc\ChannelCredentials::createInsecure(),
     ]
@@ -154,6 +154,13 @@ $app->delete('/restaurants/{res_id}', function (Request $request, Response $resp
     ];
 
     return $response->withStatus($res["code"])->withJson($res);
+});
+
+$app->get('/[{path:.*}]', function (Request $request, Response $response, array $args) {
+    return $response->withStatus(404)->withJson([
+        "code" => 404,
+        "message" => "Invalid path"
+    ]);
 });
 
 $app->run();
