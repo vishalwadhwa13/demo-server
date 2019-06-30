@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package restaurant_service;
+option go_package="restaurant_service";
+
+message Restaurant {
+    uint64 res_id = 1;
+    string name = 2;
+    double rating = 3;
+    repeated string cuisines = 4;
+    double cost_for_two = 5;
+
+    message Location {
+        double lat = 1;
+        double long = 2;
+    }
+
+    string opening_time = 6;
+    string closing_time = 7;
+    Location location = 8;
+}
+
+message Status {
+    enum StatusCode {
+        FAIL = 0;
+        SUCCESS = 1;
+    }
+    StatusCode code = 1;
+    string message = 2;
+}
+
+message AddRestaurantRequest {
+    Restaurant restaurant = 1;
+}
+
+message AddRestaurantResponse {
+    uint64 res_id = 1;
+    Status status = 2;
+}
+
+message GetRestaurantRequest {
+    uint64 res_id = 1;
+}
+
+message GetRestaurantResponse {
+    Restaurant restaurant = 1;
+    Status status = 2;
+}
+
+message EditRestaurantRequest {
+    Restaurant restaurant = 1;
+}
+
+message EditRestaurantResponse {
+    Status status = 2;
+}
+
+message DeleteRestaurantRequest {
+    uint64 res_id = 1;
+}
+
+message DeleteRestaurantResponse {
+    Status status = 2;
+}
+
+message GetAllRestaurantRequest {
+
+}
+
+service RestaurantService {
+    rpc AddRestaurant(AddRestaurantRequest) returns (AddRestaurantResponse) {}
+    rpc GetRestaurant(GetRestaurantRequest) returns (GetRestaurantResponse) {}
+    rpc EditRestaurant(EditRestaurantRequest) returns (EditRestaurantResponse) {}
+    rpc DeleteRestaurant(DeleteRestaurantRequest) returns (DeleteRestaurantResponse) {}
+    rpc GetAllRestaurant(GetAllRestaurantRequest) returns (stream GetRestaurantResponse) {}
+}
